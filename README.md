@@ -24,8 +24,8 @@ CL is more than just a digital currency; it's a platform for AI enthusiasts to e
 
 ## CL Coin Specifications
 
-- **P2P Port:** 8865
-- **RPC Port:** 9788
+- **P2P Port:** 8369
+- **RPC Port:** 9369
 - **Block Time:** 1 minute
 - **Block Reward:** 500 CL (500reward, 25 donation)
 
