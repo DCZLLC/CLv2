@@ -1,0 +1,6 @@
+usr/local/bin/cl-qt usr/bin
+share/pixmaps/cl32.xpm usr/share/pixmaps
+share/pixmaps/cl16.xpm usr/share/pixmaps
+share/pixmaps/cl128.png usr/share/pixmaps
+debian/cl-qt.desktop usr/share/applications
+debian/cl-qt.protocol usr/share/kde4/services/

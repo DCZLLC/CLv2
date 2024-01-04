@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=CL Core
+Comment=Connect to the Cl P2P Network
+Comment[de]=Verbinde mit dem Cl peer-to-peer Netzwerk
+Comment[fr]=Cl, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Cl, eşten eşe kriptografik sanal para birimi
+Exec=cl-qt %u
+Terminal=false
+Type=Application
+Icon=cl128
+MimeType=x-scheme-handler/cl;
+Categories=Office;Finance;

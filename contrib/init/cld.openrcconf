@@ -1,0 +1,33 @@
+# /etc/conf.d/cld: config file for /etc/init.d/cld
+
+# Config file location
+#CLD_CONFIGFILE="/etc/cl/cl.conf"
+
+# What directory to write pidfile to?  (created and owned by $CLD_USER)
+#CLD_PIDDIR="/var/run/cld"
+
+# What filename to give the pidfile
+#CLD_PIDFILE="${CLD_PIDDIR}/cld.pid"
+
+# Where to write cld data (be mindful that the blockchain is large)
+#CLD_DATADIR="/var/lib/cld"
+
+# User and group to own cld process
+#CLD_USER="cl"
+#CLD_GROUP="cl"
+
+# Path to cld executable
+#CLD_BIN="/usr/bin/cld"
+
+# Nice value to run cld under
+#CLD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#CLD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for cld to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+CLD_SIGTERM_TIMEOUT=60

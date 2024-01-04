@@ -1,0 +1,23 @@
+FROM arm32v7/ubuntu:latest
+
+MAINTAINER cade <cade.call@mediciventures.com>
+
+EXPOSE $RPCPORT
+
+EXPOSE $PORT
+
+RUN useradd -ms /bin/bash cl
+
+RUN mkdir /etc/cl
+
+RUN mkdir /var/lib/cl
+
+RUN chown cl:cl /etc/cl /var/lib/cl
+
+WORKDIR /home/cl
+
+COPY --chown=cl:cl linux64/* ./run.sh /home/cl/
+
+USER cl
+
+CMD ["/home/cl/run.sh"]

@@ -1,0 +1,8 @@
+/usr/bin/cl-cli		--	gen_context(system_u:object_r:cl_exec_t,s0)
+/usr/sbin/cld		--	gen_context(system_u:object_r:cl_exec_t,s0)
+/usr/lib(64)?/cl/cld		--	gen_context(system_u:object_r:cl_exec_t,s0)
+
+/etc/cl(/.*)?		gen_context(system_u:object_r:cl_conf_t,s0)
+/var/lib/cl(/.*)?		gen_context(system_u:object_r:cl_var_lib_t,s0)
+
+(/var)?/run/cld(/.*)?   gen_context(system_u:object_r:cl_var_run_t,s0)

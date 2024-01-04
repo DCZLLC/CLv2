@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/cl/.cl" ]; then
+	CLD_DEFAULT_DATADIR="/var/lib/cl/.cl"
+else
+	CLD_DEFAULT_DATADIR="/var/lib/cld"
+fi
+
+CLD_CONFIGFILE=${CLD_CONFIGFILE:-/etc/cl/cl.conf}
+CLD_PIDDIR=${CLD_PIDDIR:-/var/run/cld}
+CLD_PIDFILE=${CLD_PIDFILE:-${CLD_PIDDIR}/cld.pid}
+CLD_DATADIR=${CLD_DATADIR:-${CLD_DEFAULT_DATADIR}}
+CLD_USER=${CLD_USER:-${CL_USER:-cl}}
+CLD_GROUP=${CLD_GROUP:-cl}
+CLD_BIN=${CLD_BIN:-/usr/bin/cld}
+CLD_NICE=${CLD_NICE:-${NICELEVEL:-0}}
+CLD_OPTS="${CLD_OPTS:-${CL_OPTS}}"
+
+name="Cl Core Daemon"
+description="Cl cryptocurrency P2P network daemon"
+
+command="/usr/bin/cld"
+command_args="-pid=\"${CLD_PIDFILE}\" \
+		-conf=\"${CLD_CONFIGFILE}\" \
+		-datadir=\"${CLD_DATADIR}\" \
+		-daemon \
+		${CLD_OPTS}"
+
+required_files="${CLD_CONFIGFILE}"
+start_stop_daemon_args="-u ${CLD_USER} \
+			-N ${CLD_NICE} -w 2000"
+pidfile="${CLD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${CLD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${CLD_USER}:${CLD_GROUP}" \
+	"${CLD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${CLD_USER}:${CLD_GROUP}" \
+	"${CLD_PIDDIR}"
+
+	checkpath -f \
+	-o ${CLD_USER}:${CLD_GROUP} \
+	-m 0660 \
+	${CLD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${CLD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run cld."
+		eerror "The setting must appear in ${CLD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following "
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Cl Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}
