@@ -1,4 +1,4 @@
-# CryptoLuck White Paper
+# CryptoLuck White Paper- ####DRAFT###
 
 ## Table of Contents
 1. **Introduction**
