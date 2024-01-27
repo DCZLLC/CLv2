@@ -1,12 +1,12 @@
 # $Id$
 
-srcdir=	/home/legends/Desktop/Cryptoluck-release/Cryptoluck-Release/CLv2/db4/db-4.8.30.NC/dist/..
+srcdir=	/home/legends/Desktop/CLv2.0/db4/db-4.8.30.NC/dist/..
 builddir=.
 
 ##################################################
 # Installation directories and permissions.
 ##################################################
-prefix=	/home/legends/Desktop/Cryptoluck-release/Cryptoluck-Release/CLv2/db4
+prefix=	/home/legends/Desktop/CLv2.0/db4
 exec_prefix=${prefix}
 bindir=	${exec_prefix}/bin
 includedir=${prefix}/include

@@ -1,0 +1,1 @@
+qt/libclqt_a-qrc_cl.o: qt/qrc_cl.cpp

@@ -46,8 +46,8 @@ from the root of the repository.
 
 1. Clone the CL Core source code:
     ```shell
-    git clone https://github.com/CLProject/CLcoin
-    cd CLcoin
+    git clone https://github.com/DCZLLC/CLv2.git
+    cd CLv2
     ```
 
 2.  Build cl-core:

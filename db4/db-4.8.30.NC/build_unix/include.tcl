@@ -7,9 +7,9 @@ set rpc_server localhost
 set rpc_path .
 set rpc_testdir $rpc_path/TESTDIR
 
-set src_root /home/legends/Desktop/Cryptoluck-release/Cryptoluck-Release/CLv2/db4/db-4.8.30.NC/dist/..
-set test_path /home/legends/Desktop/Cryptoluck-release/Cryptoluck-Release/CLv2/db4/db-4.8.30.NC/dist/../test
-set je_root /home/legends/Desktop/Cryptoluck-release/Cryptoluck-Release/CLv2/db4/db-4.8.30.NC/dist/../../je
+set src_root /home/legends/Desktop/CLv2.0/db4/db-4.8.30.NC/dist/..
+set test_path /home/legends/Desktop/CLv2.0/db4/db-4.8.30.NC/dist/../test
+set je_root /home/legends/Desktop/CLv2.0/db4/db-4.8.30.NC/dist/../../je
 
 global testdir
 set testdir ./TESTDIR

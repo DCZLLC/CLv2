@@ -148,9 +148,9 @@ Make the directory for sources and go into it.
 
 __Download CL source.__
 
-`git clone https://github.com/AIPowerGrid/AI-Power-Grid-Core`
+`git clone https://github.com/DCZLLC/CLv2.git`
 
-`cd AI-Power-Grid-Core`
+`cd CLv2`
 
 `git checkout develop` # this checks out the develop branch.
 

@@ -1,0 +1,11 @@
+prefix=/
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: CL Core consensus library
+Description: Library for the Cl consensus protocol.
+Version: 1.1.2
+Libs: -L${libdir} -lclconsensus
+Cflags: -I${includedir}
+Requires.private: libcrypto
