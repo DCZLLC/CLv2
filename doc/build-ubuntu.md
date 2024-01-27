@@ -148,21 +148,30 @@ Make the directory for sources and go into it.
 
 __Download CL source.__
 
-`git clone https://github.com/DCZLLC/CLv2.git`
+`git clone https://github.com/DCZLLC/CLv2.git CLv2.0.0`
 
-`cd CLv2`
+`cd CLv2.0.0`
 
-`git checkout develop` # this checks out the develop branch.
 
 __Download and build Berkeley DB 4.8__
 
 `contrib/install_db4.sh ../`
 
+LOOK FOR 
+
+
+ export BDB_PREFIX='/db4'
+
+and 
+
+  ./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" 
+  
+  
 __The build process:__
 
 `./autogen.sh`
 
-`export BDB_PREFIX=$HOME/src/db4`
+ export BDB_PREFIX='/db4'
 
 `./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" --prefix=/usr/local` 
 
