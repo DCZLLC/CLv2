@@ -28,6 +28,8 @@ CL is more than just a digital currency; it's a platform for AI enthusiasts to e
 - **RPC Port:** 9369
 - **Block Time:** 1 minute
 - **Block Reward:** 500 CL (500reward, 25 donation)
+- **Block Halving:** 250 CL (250 reward, 25 donation) - BLOCK 86000
+
 
 
 License
