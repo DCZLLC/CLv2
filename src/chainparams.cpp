@@ -107,6 +107,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
+	    
      //   consensus.nSubsidyHalvingInterval = 1000000;  //~ 1.9 years at 1 min block time
         consensus.nBIP34Enabled = true;
         consensus.nBIP65Enabled = true; // 
@@ -160,13 +161,20 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid. Block# 0
         consensus.defaultAssumeValid = uint256S("0x00000000000262dbd8805d8ed2bbff47e709d6c04b5bd9590d0121087d304977"); // Genesis block
+bool isFullNode = false;  // Default to pruned node
 
         pchMessageStart[0] = 0x41; // A
         pchMessageStart[1] = 0x49; // I
         pchMessageStart[2] = 0x34; // 4
         pchMessageStart[3] = 0x45; // E
         nDefaultPort = 8369;
-        nPruneAfterHeight = 100000;
+	 
+	    if (isFullNode) {
+    nPruneAfterHeight = 0;  // No pruning for full nodes
+} else {
+    nPruneAfterHeight = 100000;  // Prune after 100,000 for light nodes
+}
+      
 		
 	    uint32_t nGenesisTime = 1703650172; // October 30, 2023, at 00:00:00 UTC
 
