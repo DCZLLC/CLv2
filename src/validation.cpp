@@ -1319,30 +1319,33 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus
     return true;
 }
 
-CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
-{
-    CAmount nSubsidy = 500 * COIN;  // Initial subsidy after the fixed period
+CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams) {
+    CAmount nSubsidy = 500 * COIN;  // Default initial subsidy
 
-    if (nHeight >= 86000 && nHeight < 126000) {
-        // First halving: Subsidy is 250 COIN for blocks between 86,000 and 126,000
-        nSubsidy = 250 * COIN;
-    } else if (nHeight >= 126000 && nHeight < 136000) {
-        // Second halving: 25% reduction for blocks between 126,000 and 136,000
-        nSubsidy = 187.50 * COIN;
-    } else if (nHeight >= 136000) {
-        // Subsidy reduces by 5% every 15,000 blocks after block 136,000
-        int halvings = (nHeight - 136000) / 15000;
-        for (int i = 0; i < halvings; ++i) {
-            nSubsidy *= 0.95;  // 5% reduction in subsidy for each halving
-        }
-        nSubsidy = std::max(nSubsidy, static_cast<CAmount>(0));  // Ensure subsidy is not negative
-    } else if (nHeight >= 650000) {
-        // Set subsidy to 0 for blocks with height 650,000 and above
-        nSubsidy = 0;
+    // Minimum subsidy value defined as 1 COIN
+    const CAmount MIN_SUBSIDY = 1 * COIN;
+
+    // Set subsidy to minimum for block heights 650,000 and above
+    if (nHeight >= 650000) {
+        return MIN_SUBSIDY;
     }
 
-    // Default case: Initial subsidy is 500 COIN
-    return nSubsidy;
+    // First halving: 250 COIN for blocks 86,000 to 126,000
+    if (nHeight >= 86000 && nHeight < 126000) {
+        nSubsidy = 250 * COIN;
+    }
+    // Second halving: 187.50 COIN for blocks 126,000 to 136,000
+    else if (nHeight >= 126000 && nHeight < 136000) {
+        nSubsidy = 187.50 * COIN;
+    }
+    // Gradual reduction: 5% reduction every 15,000 blocks after block 136,000
+    else if (nHeight >= 136000) {
+        int halvings = (nHeight - 136000) / 15000;
+        nSubsidy *= std::pow(0.95, halvings);  // Apply the 5% reduction
+    }
+
+    // Ensure subsidy does not fall below the minimum subsidy
+    return std::max(nSubsidy, MIN_SUBSIDY);
 }
 
 
